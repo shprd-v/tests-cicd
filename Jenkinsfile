@@ -11,11 +11,8 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 sh '''
-                    python --version || echo "python not found"
-                    pip --version || echo "pip not found"
-
-                    pip install -r requirements.txt
-                    playwright install
+                    python3 --version
+                    pip3 install -r requirements.txt
                 '''
             }
         }
