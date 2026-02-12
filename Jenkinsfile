@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'mcr.microsoft.com/playwright/python:v1.47.0-jammy'
-            args '--shm-size=2g'
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
@@ -16,8 +11,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 sh '''
+                    python --version || echo "python not found"
+                    pip --version || echo "pip not found"
+
                     pip install -r requirements.txt
-                    playwright install --with-deps
+                    playwright install
                 '''
             }
         }
